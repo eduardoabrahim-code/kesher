@@ -1577,10 +1577,11 @@
     <div class="cta-eyebrow">Pronto para conectar?</div>
     <h2 class="cta-title">Faça parte do Kesher<br>Business Club</h2>
     <p class="cta-subtitle">Vagas limitadas por segmento para garantir a qualidade das conexões.</p>
-    <form action="https://formsubmit.co/ajax/eduardo.abrahim@gmail.com" method="POST" id="kesher-form" style="max-width: 560px; margin: 0 auto;">
+    <form action="https://formsubmit.co/eduardo.abrahim@gmail.com" method="POST" style="max-width: 560px; margin: 0 auto;" target="_blank">
       <input type="hidden" name="_subject" value="Novo cadastro Kesher Business Club">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://kesherclub.com.br">
       <div class="form-row">
         <div class="form-field">
           <label>Nome completo</label>
@@ -1613,54 +1614,8 @@
           <textarea name="Mensagem" rows="3" placeholder="Conte brevemente sobre você e o que faz..." style="background: rgba(255,255,255,0.04); border: 1px solid var(--gold-line); color: var(--off-white); padding: 14px 18px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 300; outline: none; width: 100%; resize: vertical;"></textarea>
         </div>
       </div>
-      <div id="kf-msg" style="display:none; padding: 14px 18px; margin-top: 12px; font-size: 14px; text-align: center; border: 1px solid var(--gold); color: var(--gold); background: rgba(200,160,64,0.08);"></div>
       <button type="submit" class="btn-primary" style="width: 100%; margin-top: 12px; padding: 18px;">Enviar Manifestação de Interesse</button>
     </form>
-    <script>
-    document.getElementById('kesher-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      var btn = this.querySelector('button[type="submit"]');
-      var msg = document.getElementById('kf-msg');
-      btn.innerText = 'Enviando...';
-      btn.disabled = true;
-      try {
-        var res = await fetch('https://formsubmit.co/ajax/eduardo.abrahim@gmail.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            Nome: this.querySelector('[name="Nome"]').value,
-            WhatsApp: this.querySelector('[name="WhatsApp"]').value,
-            Email: this.querySelector('[name="Email"]').value,
-            Segmento: this.querySelector('[name="Segmento"]').value,
-            Mensagem: this.querySelector('[name="Mensagem"]').value,
-            _subject: 'Novo cadastro Kesher Business Club',
-            _captcha: 'false',
-            _template: 'table'
-          })
-        });
-        var data = await res.json();
-        if (data.success === 'true' || data.success === true) {
-          msg.style.display = 'block';
-          msg.style.borderColor = 'var(--gold)';
-          msg.style.color = 'var(--gold)';
-          msg.style.background = 'rgba(200,160,64,0.08)';
-          msg.innerText = '✦ Recebemos sua manifestação! Entraremos em contato em breve.';
-          this.reset();
-          btn.innerText = 'Enviado com sucesso ✦';
-        } else {
-          throw new Error('fail');
-        }
-      } catch(err) {
-        msg.style.display = 'block';
-        msg.style.borderColor = '#e05555';
-        msg.style.color = '#e05555';
-        msg.style.background = 'rgba(224,85,85,0.08)';
-        msg.innerText = 'Erro ao enviar. Por favor tente novamente.';
-        btn.innerText = 'Enviar Manifestação de Interesse';
-        btn.disabled = false;
-      }
-    });
-    </script>
   </section>
 
 </div>
